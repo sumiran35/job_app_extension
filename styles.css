@@ -1,0 +1,58 @@
+body {
+    font-family: 'Times New Roman', sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info {
+    width: 100%;
+    max-width: 500px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+button.form-input {
+    cursor: pointer;
+}
+
+.add-work {
+    margin-top: 20px;
+}
+
+.add-work button {
+    padding: 10px 20px;
+    border: 0px;
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-work button:hover {
+    background-color: blue;
+}
+
+#save {
+    justify-content: center;
+    margin-top: 25px;
+}
