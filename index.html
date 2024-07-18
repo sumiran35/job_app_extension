@@ -42,11 +42,16 @@
             <div id="work-experience-box">
                 <div id="work-experience-modal" class="modal">
                     <div class="modal-content">
-
+                        <button id="done-adding" class="done-adding" type="button" aria-label="close"></button>
                         <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px">
                             <path fill="#F44336" d="M21.5 4.5H26.501V43.5H21.5z"  transform="rotate(45.001 24 24)" />
                             <path fill="#F44336" d="M21.5 4.5H26.5V43.501H21.5z" transform="rotate(135.008 24 24)" />
                         </svg> <!-- yoinked from freecodecamp todolist-->
+                        <div id="discard-box" class="discard">
+                            Discard?
+                            <button class="discard" id="accept-close">Discard</button>
+                            <button class="discard" id="cancel-close">Cancel</button>
+                        </div>
 
                       <form id="work-experience-form">
                             <label class="form-label" for="company">Company</label>
