@@ -39,6 +39,31 @@
             <div class="add-work">
                 <button type="button" id="add-past-work">Add Past Work Experience</button>
             </div>
+            <div id="work-experience-box">
+                <div id="work-experience-modal" class="modal">
+                    <div class="modal-content">
+
+                        <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px">
+                            <path fill="#F44336" d="M21.5 4.5H26.501V43.5H21.5z"  transform="rotate(45.001 24 24)" />
+                            <path fill="#F44336" d="M21.5 4.5H26.5V43.501H21.5z" transform="rotate(135.008 24 24)" />
+                        </svg> <!-- yoinked from freecodecamp todolist-->
+
+                      <form id="work-experience-form">
+                            <label class="form-label" for="company">Company</label>
+                            <input class="form-input" type="text" name="company" placeholder="Company" required />
+                            <label class="form-label" for="position">Position</label>
+                            <input class="form-input" type="text" name="position" placeholder="Position" required />
+                            <label class="form-label" for="start-date">Start Date</label>
+                            <input class="form-input" type="date" name="start-date" required />
+                            <label class="form-label" for="end-date">End Date</label>
+                            <input class="form-input" type="date" name="end-date" required />
+                            <label class="form-label" for="description">Job Description</label>
+                            <textarea class="form-input" name="description" placeholder="Description" required></textarea>
+                            <button class="form-input" type="button" id="save-work-experience">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </main>
         <footer>
             <button class="form-input" id="save" type="submit">Save</button>
