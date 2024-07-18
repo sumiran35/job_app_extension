@@ -56,3 +56,42 @@ button.form-input {
     justify-content: center;
     margin-top: 25px;
 }
+
+#work-experience-box {
+    z-index: 1;
+    display: none; 
+    width: 500px;
+    background-color: #f5efef;
+    padding: 20px; 
+    margin-top: 20px; 
+    border: 1px solid #dad7d7; 
+    
+}
+
+.done-adding {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+  
+.close-icon {
+    width: 20px;
+    height: 20px;
+}
+  
+.discard {
+    display: none;
+    background-color: white;
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 15px;
+    z-index: 2;
+}
+
+.discard-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
