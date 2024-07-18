@@ -48,8 +48,35 @@ const removeAll = () => {
 
 
 
-const allJobApp = [];
-let currentJobApp = {};
+const allJobAppStorage = []; //array that stores objects
+let currentJobApp = {
+    f_name: "",
+    l_name: "",
+    email: "",
+    address: "",
+    city: "",
+    state: "",
+    postal: "",
+    phone: "",
+    //resume : as BOO potentially?
+    workExp: {company: "",
+        position: "",
+        startDate: "",
+        endDate: "",
+        responsibility: ""},
+    education: {
+        educationLevel: "",
+        school: "",
+        degree: "",
+        start: "",
+        end: ""
+    }
+
+
+
+
+};  //object to store current values.
+
 
 
 
