@@ -1,5 +1,5 @@
 const fname = document.getElementById("fname");
-const lmane = document.getElementById("lname");
+const lname = document.getElementById("lname");
 const address = document.getElementById("address");
 const city = document.getElementById("city");
 const state = document.getElementById("state");
@@ -12,10 +12,26 @@ const legal2 = document.getElementById("legal2");
 //use this button to add work might need to be hidden in the begining
 const addWorkBtn = document.getElementById("add-past-work"); //<- add these in html ------------|
 const doneAddingBtn = document.getElementById("done-adding");// <- add these in html JEFF ------|
-// const endDialog;  //add necessary element in HTML                                            |---- all done
+// const endDialog;  //add necessary element in HTML
+// |---- all done
+const company  = document.getElementById("company");
+const position = document.getElementById("position");
+const workStartDate = document.getElementById("work_start_date");
+const workEndDate = document.getElementById("work_end_date");
+const reponsibility = document.getElementById("reponsibility");
+
+
 const acceptCloseBtn = document.getElementById("accept-close");// add this in html -------------|
 const cancelCloseBtn = document.getElementById("cancel-close");//,- add this in html -----------|
 const submitBtn = document.getElementById("save");
+
+const addEducationBtn = document.getElementById("add-education");
+const levelOfEducation = document.getElementById("level-of-education");
+const schoolName = document.getElementById("school-name");
+const degreeName = document.getElementById("degree-name");
+const schoolStartDate = document.getElementById("school-start-date");
+const schoolEndDate = document.getElementById("school-end-date");
+const doneAddingEducationBtn = document.getElementById("done-add-education");
 
 //addWorkBtn.addEventListener("click", () => taskForm.classList.toggle("hidden"));
 //use this if i need to hide shit. this will defniteley change
@@ -50,26 +66,26 @@ const removeAll = () => {
 
 const allJobAppStorage = []; //array that stores objects
 let currentJobApp = {
-    f_name: "",
-    l_name: "",
-    email: "",
-    address: "",
-    city: "",
-    state: "",
-    postal: "",
-    phone: "",
+    f_name: fname.value,
+    l_name: lname.value,
+    email: email.value,
+    address: address.value,
+    city: city.value,
+    state: state.value,
+    postal: zip.value,
+    phone: phone.value,
     //resume : as BOO potentially?
-    workExp: {company: "",
-        position: "",
-        startDate: "",
-        endDate: "",
-        responsibility: ""},
+    workExp: {company: company.value,
+        position: position.value,
+        startDate: workStartDate.value,
+        endDate: workEndDate.value,
+        responsibility: reponsibility.value},
     education: {
-        educationLevel: "",
-        school: "",
-        degree: "",
-        start: "",
-        end: ""
+        educationLevel: levelOfEducation.value,
+        school: schoolName.value,
+        degree: degreeName.value,
+        start: schoolStartDate.value,
+        end: schoolEndDate.value
     }
 
 
@@ -77,7 +93,9 @@ let currentJobApp = {
 
 };  //object to store current values.
 
+//need a function to store the object into the task form
 
+const addTolist = (jobapp = {}) => {};
 
 
 acceptCloseBtn.addEventListener("click", () => endDialog.close());//primarily used to ask for confirmation
