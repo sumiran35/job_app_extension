@@ -6,44 +6,43 @@
         <link href="styles.css" rel="stylesheet" />
     </head>
     <body>
-        <div class="info">
-            <form id="information-section">
-                <label class="form-label" id="fname-label" for="name">First Name</label>
-                <input class="form-input" id="fname" type="text" name="fName" placeholder="First Name" required></input>
-                <label class="form-label" id="lname-label" for="name">Last Name</label>
-                <input class="form-input" id="lname" type="text" name="lName" placeholder="Last Name" required></input>
-                <label class="form-label" id="email-label" for="email">Email</label>
-                <input class="form-input" id="email" type="email" name="email" placeholder="Email" required></input>
-                <label class="form-label" id="address-label" for="address">Address</label>
-                <input class="form-input" id="address" type="text" name="address" placeholder="Address" required></input>
-                <label class="form-label" id="city-label" for="city">City</label>
-                <input class="form-input" id="city" type="text" name="city" placeholder="City" required></input>
-                <label class="form-label" id="state-label" for="state">State</label>
-                <input class="form-input" id="state" type="text" name="state" placeholder="State" required></input>
-                <label class="form-label" id="postal-label" for="postal">Postal Code</label>
-                <input class="form-input" id="postal" type="number" name="postal" placeholder="Postal Code" required></input>
-                <label class="form-label" id="phone-label" for="phone">Phone Number</label>
-                <input class="form-input" id="phone" type="number" name="phone" placeholder="Phone Number" required></input>
-                <label class="form-label" id="resume-label" for="resume">Resume</label>
-                <input class="form-input" id="resume" type="file" name="resume" placeholder="Resume"></input>
-                <label class="form-label" id="legal-label" for="legal">Legally allowed to work?</label>
-                <input class="form-input" id="legal1" type="radio" name="legal" required>Yes</input>
-                <input class="form-input" id="legal2" type="radio" name="legal" required>No</input>
-                <label class="form-label" id="age-label" for="age">Above 18 years old?</label>
-                <input class="form-input" id="age1" type="radio" name="age" required>Yes</input>
-                <input class="form-input" id="age2" type="radio" name="age" required>No</input>
-                <label class="form-label" id="work-label" for="work">Work permit?</label>
-                <input class="form-input" id="work1" type="radio" name="work" required>Yes</input>
-                <input class="form-input" id="work2" type="radio" name="work" required>No</input>
-                <label id="about-me-question-1">Temp 1</label>
-                <textarea placeholder="Enter here" class="form-input"></textarea>
-                <label id="about-me-question-2">Temp 2</label>
-                <textarea placeholder="Enter here" class="form-input"></textarea>
-                <label id="about-me-question-3">Temp 3</label>
-                <textarea placeholder="Enter here" class="form-input"></textarea>
-                <button class="form-input" id="Save" type="submit">Save</button>
-            </form>
-        </div>
+        <main>
+            <div class="info">
+                <form id="information-section">
+                    <label class="form-label" id="fname-label" for="name">First Name</label>
+                    <input class="form-input" id="fname" type="text" name="fName" placeholder="First Name" required></input>
+                    <label class="form-label" id="lname-label" for="name">Last Name</label>
+                    <input class="form-input" id="lname" type="text" name="lName" placeholder="Last Name" required></input>
+                    <label class="form-label" id="email-label" for="email">Email</label>
+                    <input class="form-input" id="email" type="email" name="email" placeholder="Email" required></input>
+                    <label class="form-label" id="address-label" for="address">Address</label>
+                    <input class="form-input" id="address" type="text" name="address" placeholder="Address" required></input>
+                    <label class="form-label" id="city-label" for="city">City</label>
+                    <input class="form-input" id="city" type="text" name="city" placeholder="City" required></input>
+                    <label class="form-label" id="state-label" for="state">State</label>
+                    <input class="form-input" id="state" type="text" name="state" placeholder="State" required></input>
+                    <label class="form-label" id="postal-label" for="postal">Postal Code</label>
+                    <input class="form-input" id="postal" type="number" name="postal" placeholder="Postal Code" required></input>
+                    <label class="form-label" id="phone-label" for="phone">Phone Number</label>
+                    <input class="form-input" id="phone" type="number" name="phone" placeholder="Phone Number" required></input>
+                    <label class="form-label" id="resume-label" for="resume">Resume</label>
+                    <input class="form-input" id="resume" type="file" name="resume" placeholder="Resume"></input>
+    
+                    <label class="form-label" id="about-me-question-1">Temp 1</label>
+                    <textarea placeholder="Enter here" class="form-input"></textarea>
+                    <label class="form-label" id="about-me-question-2">Temp 2</label>
+                    <textarea placeholder="Enter here" class="form-input"></textarea>
+                    <label class="form-label" id="about-me-question-3">Temp 3</label>
+                    <textarea placeholder="Enter here" class="form-input"></textarea>
+                </form>
+            </div>
+            <div class="add-work">
+                <button type="button" id="add-past-work">Add Past Work Experience</button>
+            </div>
+        </main>
+        <footer>
+            <button class="form-input" id="save" type="submit">Save</button>
+        </footer>
+        <script src="./script.js"></script>
     </body>
-<script src = "./script.js"> </script>
 </html>
