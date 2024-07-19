@@ -1,5 +1,5 @@
 const fname = document.getElementById("fname");
-const lmane = document.getElementById("lname");
+const lname = document.getElementById("lname");
 const address = document.getElementById("address");
 const city = document.getElementById("city");
 const state = document.getElementById("state");
@@ -28,7 +28,7 @@ const company  = document.getElementById("company");
 const position = document.getElementById("position");
 const workStartDate = document.getElementById("work-start-date");
 const workEndDate = document.getElementById("work-end-date");
-const reponsibility = document.getElementById("reponsibility");
+const responsibility = document.getElementById("responsibility");
 
 const addEducationBtn = document.getElementById("add-education");
 const levelOfEducation = document.getElementById("level-of-education");
@@ -37,6 +37,7 @@ const degreeName = document.getElementById("degree-name");
 const schoolStartDate = document.getElementById("school-start-date");
 const schoolEndDate = document.getElementById("school-end-date");
 const doneAddingEducationBtn = document.getElementById("done-add-education");
+const listEducation = document.getElementById("listEducation");
 
 addWorkBtn.addEventListener("click", () => {showPastWorkBox()});     // Runs when Add Past Work Experience is pressed
 
@@ -58,16 +59,17 @@ doneAddingBtn.addEventListener("click", ()=> {                  // Runs when X i
 });
 
 submitWorkBtn.addEventListener("click", () => {              // Runs when submit button for PAST JOBS is pressed, pushes info to array
-    const pastJob = {                                       // and updates ui
+    const pastJob = {     // and updates ui
+        uniqueJobId: `${company.value}-${position.value}-${workStartDate.value}` ,
         company: company.value,
         position: position.value,
         startDate: workStartDate.value,
         endDate: workEndDate.value,
         responsibility: responsibility.value
     };
-    allJobAppStorage.push(pastJob);
+    allJobAppStorage.unshift(pastJob);
 
-    listPastJobs.innerHTML += `<div id="temp"><br />
+    listPastJobs.innerHTML += `<div id="`${pastJob.uniqueJobId}`"><br />
     Company: ${company.value} <br />
     Position: ${position.value} <br />
     Time: ${workStartDate.value} -> ${workEndDate.value} <br />
@@ -79,6 +81,35 @@ submitWorkBtn.addEventListener("click", () => {              // Runs when submit
     alert("Successfully saved!");
     removeAll();
 });
+addEducationBtn.addEventListener("click", ()=> {
+    const education = {
+        uniqueEducationId: `${levelOfEducation.value}-${schoolName.value}-${degreeName.value}`,
+        educationLevel: levelOfEducation.value,
+        school: schoolName.value,
+        degree: degreeName.value,
+        start: schoolStartDate.value,
+        end: schoolEndDate.value
+    }
+    allEducationStorage.unshift(education);
+    
+    listEducation.innerHTML += `<div id="`${education.uniqueEducationId}`">
+Education Level: ${levelOfEducation.value} <br />
+    school: ${schoolName.value} <br />
+    Degree: ${degreeName.value} <br />
+    Time: ${workStartDate.value} -> ${workEndDate.value} <br />
+    <button onclick="editPastEducation()" type="button">Edit</button>
+    <button onclick="removePastEducation()" type="button">Delete</button>
+    <br />
+</div>`
+    
+    removeAll();
+});
+const editPastEducation = () => {};
+
+
+const removePastEducation = () => {
+
+};
 
 const clearJobInfo = () => {                            // Clears information in past work info boxes
     company.value = "";
@@ -92,25 +123,27 @@ const removeAll = () => {                                           // Helper fu
     clearJobInfo();
     const discardBox = document.getElementsByClassName("discard");
     const container = document.getElementById("work-experience-box").style.display = "none";
+    const containerEdu = document.getElementById("education-container");
     for (let i = 0; i < discardBox.length; i++) {
         discardBox[i].style.display = "none";
     }
 };
 
 const removePastWork = () => {
-    const removeDiv = document.getElementById("temp");
+    const removeDiv = document.getElementById("temp"); //this id needs to change
     removeDiv.innerHTML = ""; 
     alert(allJobAppStorage[0][company.value]);
 };
 
 const editPastWork = () => {
     alert("hei");
-    const editDiv = document.getElementById("temp");
+    const editDiv = document.getElementById("temp"); //same thing here
     showPastWorkBox();
 };
-
+const allEducationStorage =[];
 const allJobAppStorage = []; //array that stores objects
 let currentJobApp = {
+    
     f_name: fname.value,
     l_name: lname.value,
     email: email.value,
@@ -121,6 +154,7 @@ let currentJobApp = {
     phone: phone.value,
     //resume : as BOO potentially?
     workExp: {
+        uniqueWorkId: `${company.value}-${position.value}-${workStartDate.value}`,
         company: company.value,
         position: position.value,
         startDate: workStartDate.value,
@@ -128,6 +162,7 @@ let currentJobApp = {
         responsibility: reponsibility.value
     },
     education: {
+        uniqueEducationId: `${levelOfEducation.value}-${schoolName.value}-${degreeName.value}`,
         educationLevel: levelOfEducation.value,
         school: schoolName.value,
         degree: degreeName.value,
@@ -140,7 +175,7 @@ let currentJobApp = {
 
 //need a function to store the object into the task form
 
-const addTolist = (jobapp = {}) => {};
+//const addToWorklist = ({}) => {};
 
 acceptCloseBtn.addEventListener("click", () => endDialog.close());//primarily used to ask for confirmation
 //before ending stuff.
