@@ -65,28 +65,30 @@ const removeAll = () => {
 
 
 const allJobAppStorage = []; //array that stores objects
-let currentJobApp = {
-    f_name: fname.value,
-    l_name: lname.value,
-    email: email.value,
-    address: address.value,
-    city: city.value,
-    state: state.value,
+let currJobApp = {
+    uniqueId: "", //need to create a hash or something here to assign unique values based on unique strings to see if
+    //a app already exists
+    f_name: fname.value.toLowerCase(),
+    l_name: lname.value.toLowerCase(),
+    email: email.value.toLowerCase(),
+    address: address.value.toLowerCase(),
+    city: city.value.toLowerCase(),
+    state: state.value.toLowerCase(),
     postal: zip.value,
     phone: phone.value,
     //resume : as BOO potentially?
-    workExp: {company: company.value,
-        position: position.value,
-        startDate: workStartDate.value,
-        endDate: workEndDate.value,
-        responsibility: reponsibility.value},
+    workExp: {company: company.value.toLowerCase().split(" ").join("-"),
+        position: position.value.toLowerCase().split(" ").join("-"),
+        startDate: workStartDate.value,//might need the same method here as on top
+        endDate: workEndDate.value,//might need the same shit here as on top
+        responsibility: reponsibility.value.toLowerCase().split(" ").join("-")},
     education: {
-        educationLevel: levelOfEducation.value,
-        school: schoolName.value,
-        degree: degreeName.value,
-        start: schoolStartDate.value,
-        end: schoolEndDate.value
-    }
+        educationLevel: levelOfEducation.value.toLowerCase().split(" ").join("-"),
+        school: schoolName.value.toLowerCase().split(" ").join("-"),
+        degree: degreeName.value.toLowerCase().split(" ").join("-"),
+        start: schoolStartDate.value,//might need the same shit here as on top
+        end: schoolEndDate.value//might need the same shit here as on top
+    } //NOTE TO JEFF:- use the mthod applied stuff to generate unique ids
 
 
 
@@ -94,9 +96,13 @@ let currentJobApp = {
 };  //object to store current values.
 
 //need a function to store the object into the task form
-
-const addTolist = (jobapp = {}) => {};
-
+//NEED SOMETHING to check for if element already exists
+//here using position ad unique id but we need to chane this for sure
+const alreadyExistsApp = allJobAppStorage.indexOf((curr) => curr.uniqueId === currJobApp.uniqueId );
+const addToList = (jobApp = {}) => {};
+ if(alreadyExistsApp === -1){
+     allJobAppStorage.unshift(currJobApp);
+ }
 
 acceptCloseBtn.addEventListener("click", () => endDialog.close());//primarily used to ask for confirmation
 //before ending stuff.
