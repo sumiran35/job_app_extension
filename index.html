@@ -36,42 +36,86 @@
                     <textarea placeholder="Enter here" class="form-input"></textarea>
                     <label class="form-label" id="past-job-experience">
                         Past Work Experience: 
-                        <div id="inputted-job-experience"></div>
-                    </label>
-                </form>
-            </div>
-            <div class="add-work">
-                <button type="button" id="add-past-work">Add Past Work Experience</button>
-            </div>
-            <div id="work-experience-box">
-                <div id="work-experience-modal" class="modal">
-                    <div class="modal-content">
-                        <button id="done-adding" class="done-adding" type="button" aria-label="close"></button>
-                        <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px">
-                            <path fill="#F44336" d="M21.5 4.5H26.501V43.5H21.5z"  transform="rotate(45.001 24 24)" />
-                            <path fill="#F44336" d="M21.5 4.5H26.5V43.501H21.5z" transform="rotate(135.008 24 24)" />
-                        </svg> <!-- yoinked from freecodecamp todolist-->
-                        <div id="discard-box" class="discard">
-                            Discard?
-                            <button class="discard" id="accept-close">Discard</button>
-                            <button class="discard" id="cancel-close">Cancel</button>
+                        <div class="add-work">
+                            <button type="button" id="add-past-work">Add Past Work Experience</button>
                         </div>
-
-                      <form id="work-experience-form">
-                            <label class="form-label" for="company">Company</label>
-                            <input id="company" class="form-input" type="text" name="company" placeholder="Company" required />
-                            <label class="form-label" for="position">Position</label>
-                            <input id="position" class="form-input" type="text" name="position" placeholder="Position" required />
-                            <label class="form-label" for="start-date">Start Date</label>
-                            <input id="work-start-date" class="form-input" type="date" name="start-date" required />
-                            <label class="form-label" for="end-date">End Date</label>
-                            <input id="work-end-date" class="form-input" type="date" name="end-date" required />
-                            <label class="form-label" for="description">Job Description</label>
-                            <textarea id="responsibility" class="form-input" name="description" placeholder="Description" required></textarea>
-                            <button class="form-input" type="submit" id="save-work-experience">Save</button>
-                        </form>
+                    </label>
+                    <div id="inputted-job-experience"></div>
+                    <div id="work-experience-box">
+                        <div id="work-experience-modal" class="modal">
+                            <div class="modal-content">
+                                <button id="done-adding" class="done-adding" type="button" aria-label="close"></button>
+                                <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px">
+                                    <path fill="#F44336" d="M21.5 4.5H26.501V43.5H21.5z"  transform="rotate(45.001 24 24)" />
+                                    <path fill="#F44336" d="M21.5 4.5H26.5V43.501H21.5z" transform="rotate(135.008 24 24)" />
+                                </svg> <!-- yoinked from freecodecamp todolist-->
+                                <div id="discard-box" class="discard">
+                                    Discard?
+                                    <button class="discard" id="accept-close">Discard</button>
+                                    <button class="discard" id="cancel-close">Cancel</button>
+                                </div>
+        
+                              <form id="work-experience-form">
+                                    <label class="form-label" for="company">Company</label>
+                                    <input id="company" class="form-input" type="text" name="company" placeholder="Company" required />
+                                    <label class="form-label" for="position">Position</label>
+                                    <input id="position" class="form-input" type="text" name="position" placeholder="Position" required />
+                                    <label class="form-label" for="start-date">Start Date</label>
+                                    <input id="work-start-date" class="form-input" type="date" name="start-date" required />
+                                    <label class="form-label" for="end-date">End Date</label>
+                                    <input id="work-end-date" class="form-input" type="date" name="end-date" required />
+                                    <label class="form-label" for="description">Job Description</label>
+                                    <textarea id="responsibility" class="form-input" name="description" placeholder="Description" required></textarea>
+                                    <button class="form-input" type="submit" id="save-work-experience">Save</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <label class="form-label" id="education">
+                        Education:
+                        <div id="inputted-education"></div>
+                        <div class="add-education">
+                            <button type="button" id="add-education-btn">Add Education</button>
+                        </div>
+                    </label>
+                    <div id="education-box">
+                        <div id="education-modal" class="modal">
+                            <div class="modal-content">
+                                <button id="done-adding-edu" class="done-adding" type="button" aria-label="close"></button>
+                                <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48px" height="48px">
+                                    <path fill="#F44336" d="M21.5 4.5H26.501V43.5H21.5z"  transform="rotate(45.001 24 24)" />
+                                    <path fill="#F44336" d="M21.5 4.5H26.5V43.501H21.5z" transform="rotate(135.008 24 24)" />
+                                </svg> <!-- yoinked from freecodecamp todolist-->
+                                <div id="discard-box-edu" class="discard-edu">
+                                    Discard?
+                                    <button class="discard-edu" id="accept-close-edu">Discard</button>
+                                    <button class="discard-edu" id="cancel-close-edu">Cancel</button>
+                                </div>
+                                <form id="education-container">
+                                    <label class="form-label" for="education-level">Education</label>
+                                    <select id="dropdown" class="form-input">
+                                        <option disabled selected value>Select an option</option>
+                                        <option>Highschool Diploma</option>
+                                        <option>Some college education</option>
+                                        <option>Associate's</option>
+                                        <option>Bachelor's</option>
+                                        <option>Master's</option>
+                                        <option>Doctorate</option>
+                                    </select>
+                                    <label class="form-label" for="school">School</label>
+                                    <input id="school" class="form-input" type="text" name="school" placeholder="School" required />
+                                    <label class="form-label" for="degree">Degree</label>
+                                    <input id="degree" class="form-input" type="text" name="degree" placeholder="Degree" required />
+                                    <label class="form-label" for="start-date">Start Date</label>
+                                    <input id="education-start-date" class="form-input" type="date" name="start-date" required />
+                                    <label class="form-label" for="end-date">End Date</label>
+                                    <input id="education-end-date" class="form-input" type="date" name="end-date" required />
+                                    <button class="form-input" type="submit" id="save-work-experience">Save</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </main>
         <footer>
