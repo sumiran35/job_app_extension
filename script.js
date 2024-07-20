@@ -106,7 +106,7 @@ const submitWork = () => {              // Runs when submit button for PAST JOBS
     Position: ${position.value} <br />
     Time: ${workStartDate.value} -> ${workEndDate.value} <br />
     Description: ${responsibility.value} <br />
-    <button onclick="editPastWork()" type="button">Edit</button>
+    <button onclick="editPastWork(${pastJob.uniqueWorkId})" type="button">Edit</button>
     <button onclick="removePastWork(${pastJob.uniqueWorkId})" type="button">Delete</button>
     <br /></div>
     `
@@ -146,13 +146,22 @@ const removeAllEdu = () => {
         discardBox[i].style.display = "none";
     }
 }
-const removePastWork = (obj) => {
-    alert(obj);
-    const removeDiv = document.getElementById(obj);
+const removePastWork = (unique) => {
+    const removeDiv = document.getElementById(unique);
     removeDiv.innerHTML = ""; 
 };
 
-const editPastWork = () => {
+const editPastWork = (unique) => {
+    allJobAppStorage.forEach(e => {
+        if (unique) {                   // FIX CONDITIONAL <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            console.log("passed!");
+            company.value = e.company;
+            position.value = e.position;
+            workStartDate.value = e.startDate;
+            workEndDate.value = e.endDate;
+            responsibility.value = e.responsibility;
+        }
+    });
     showPastWorkBox();
 };
 
