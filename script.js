@@ -53,7 +53,7 @@ const showPastWorkBox = () => {                                     // helper fu
     container.style.display = "block";
 };
 
-doneAddingBtn.addEventListener("click", ()=> {                  // Runs when X is pressed
+doneAddingBtn.addEventListener("click", ()=> {                  // Runs when X is pressed for past jobs
     const discardBox = document.getElementsByClassName("discard");
     for (let i = 0; i < discardBox.length; i++) {
         discardBox[i].style.display = "block";
@@ -66,7 +66,7 @@ doneAddingBtn.addEventListener("click", ()=> {                  // Runs when X i
     });
 });
 
-stopAddingBtn.addEventListener("click", () => {
+stopAddingBtn.addEventListener("click", () => {                             // Runs when X is pressed for education
     const discardBox = document.getElementsByClassName("discard-edu");
     for (let i = 0; i < discardBox.length; i++) {
         discardBox[i].style.display = "block";
@@ -92,6 +92,7 @@ submitWorkBtn.addEventListener("click", () => {             // Checks validity a
 
 const submitWork = () => {              // Runs when submit button for PAST JOBS is pressed AND checked for validity
     const pastJob = {                                       //pushes info to array and updates ui
+        uniqueWorkId: `${company.value}-${position.value}-${workStartDate.value}`,
         company: company.value,
         position: position.value,
         startDate: workStartDate.value,
@@ -100,13 +101,13 @@ const submitWork = () => {              // Runs when submit button for PAST JOBS
     };
     allJobAppStorage.unshift(pastJob);
 
-    listPastJobs.innerHTML += `<div id="temp"><br />
+    listPastJobs.innerHTML += `<div id="${pastJob.uniqueWorkId}"><br />
     Company: ${company.value} <br />
     Position: ${position.value} <br />
     Time: ${workStartDate.value} -> ${workEndDate.value} <br />
     Description: ${responsibility.value} <br />
     <button onclick="editPastWork()" type="button">Edit</button>
-    <button onclick="removePastWork()" type="button">Delete</button>
+    <button onclick="removePastWork(${pastJob})" type="button">Delete</button>
     <br /></div>
     `
     alert("Successfully saved!");
@@ -145,19 +146,19 @@ const removeAllEdu = () => {
         discardBox[i].style.display = "none";
     }
 }
-const removePastWork = () => {
-    const removeDiv = document.getElementById("temp");
+const removePastWork = (obj) => {
+    let temp = obj.uniqueWorkId;
+    const removeDiv = document.getElementById(temp);
     removeDiv.innerHTML = ""; 
 };
 
 const editPastWork = () => {
-    
     showPastWorkBox();
-
 };
 
 const allEducationStorage =[];
 const allJobAppStorage = []; //array that stores objects
+
 let currentJobApp = {
     
     f_name: fname.value,
@@ -175,7 +176,7 @@ let currentJobApp = {
         position: position.value,
         startDate: workStartDate.value,
         endDate: workEndDate.value,
-        responsibility: reponsibility.value
+        responsibility: responsibility.value
     },
     education: {
         uniqueEducationId: `${levelOfEducation.value}-${schoolName.value}-${degreeName.value}`,
@@ -188,6 +189,7 @@ let currentJobApp = {
 
 
 };  //object to store current values.
+
 
 //need a function to store the object into the task form
 
