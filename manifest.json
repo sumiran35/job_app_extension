@@ -1,0 +1,36 @@
+{
+  "name": "Auto Job App Filler",
+  "version": "0.0.1",
+  "description": "applying to jobs in one button",
+  "permissions": ["storage", "tab"],
+  "host_permissions": ["https://*.com/careers/*",
+    "https://*.edu/careers/*",
+    "https://*.org/careers/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.com/careers/*",
+        "https://*.edu/careers/*",
+        "https://*.org/careers/*"],
+      "js": ["script.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [],
+      "matches": ["https://*.com/careers/*",
+        "https://*.edu/careers/*",
+        "https://*.org/careers/*"]
+    }
+  ],
+  "action": {
+    "default_icon": {
+
+    },
+    "default_title": "Auto Job App Filler",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 3
+}

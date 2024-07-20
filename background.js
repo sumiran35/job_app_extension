@@ -5,9 +5,9 @@ chrome.tabs.onUpdated.addListener((tabId, tab) => {
 
         chrome.tab.sendMessage(tabId, {
             type : "NEW",
-            j_company : urlParameter.get("") // need to fill this for background
+            j_company : urlParameter.get("/") // need to fill this for background
 
-        })
+        });
 
     }
-})
+});

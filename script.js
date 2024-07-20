@@ -102,15 +102,22 @@ Education Level: ${levelOfEducation.value} <br />
     <br />
 </div>`
     
-    removeAll();
+    removeAllEducation();
 });
 const editPastEducation = () => {};
 
 
 const removePastEducation = () => {
-
+    const containerEdu = document.getElementById("education-container");
+    
 };
-
+const clearEducationInfo = () => {
+    levelOfEducation.value = "";
+    schoolName.value = "";
+    degreeName.value = "";
+    workStartDate.value = "";
+    workEndDate.value = "";
+}
 const clearJobInfo = () => {                            // Clears information in past work info boxes
     company.value = "";
     position.value = "";
@@ -123,7 +130,7 @@ const removeAll = () => {                                           // Helper fu
     clearJobInfo();
     const discardBox = document.getElementsByClassName("discard");
     const container = document.getElementById("work-experience-box").style.display = "none";
-    const containerEdu = document.getElementById("education-container");
+   
     for (let i = 0; i < discardBox.length; i++) {
         discardBox[i].style.display = "none";
     }
