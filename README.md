@@ -1,1 +1,1 @@
-a little extension to apply to jobs easy ad shit
+a little extension to apply to jobs easy and shit
