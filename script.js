@@ -92,7 +92,7 @@ submitWorkBtn.addEventListener("click", () => {             // Checks validity a
 
 const submitWork = () => {              // Runs when submit button for PAST JOBS is pressed AND checked for validity
     const pastJob = {                                       //pushes info to array and updates ui
-        uniqueWorkId: `${company.value}-${position.value}-${workStartDate.value}`,
+        uniqueWorkId: `'${company.value}-${position.value}-${workStartDate.value}'`,
         company: company.value,
         position: position.value,
         startDate: workStartDate.value,
@@ -101,13 +101,13 @@ const submitWork = () => {              // Runs when submit button for PAST JOBS
     };
     allJobAppStorage.unshift(pastJob);
 
-    listPastJobs.innerHTML += `<div id="${pastJob.uniqueWorkId}"><br />
+    listPastJobs.innerHTML += `<div id=${pastJob.uniqueWorkId}><br />
     Company: ${company.value} <br />
     Position: ${position.value} <br />
     Time: ${workStartDate.value} -> ${workEndDate.value} <br />
     Description: ${responsibility.value} <br />
     <button onclick="editPastWork()" type="button">Edit</button>
-    <button onclick="removePastWork(${pastJob})" type="button">Delete</button>
+    <button onclick="removePastWork(${pastJob.uniqueWorkId})" type="button">Delete</button>
     <br /></div>
     `
     alert("Successfully saved!");
@@ -147,8 +147,8 @@ const removeAllEdu = () => {
     }
 }
 const removePastWork = (obj) => {
-    let temp = obj.uniqueWorkId;
-    const removeDiv = document.getElementById(temp);
+    alert(obj);
+    const removeDiv = document.getElementById(obj);
     removeDiv.innerHTML = ""; 
 };
 
