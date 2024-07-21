@@ -58,7 +58,10 @@ doneAddingBtn.addEventListener("click", ()=> {                  // Runs when X i
     for (let i = 0; i < discardBox.length; i++) {
         discardBox[i].style.display = "block";
     }
-    acceptCloseBtn.addEventListener("click", () => removeAll());
+    acceptCloseBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        removeAll();
+ });
     cancelCloseBtn.addEventListener("click", ()=>{
         for (let i = 0; i < discardBox.length; i++) {
             discardBox[i].style.display = "none";
