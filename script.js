@@ -82,9 +82,10 @@ stopAddingBtn.addEventListener("click", () => {                             // R
     });
 });
 
-submitWorkBtn.addEventListener("click", () => {             // Checks validity after trying to submit past work
+submitWorkBtn.addEventListener("click", (e) => {             // Checks validity after trying to submit past work
     let validity = company.value && position.value && workStartDate.value && workEndDate.value && responsibility.value;
     alert(validity);
+    e.preventDefault();
     if (validity) {
         submitWork();
     }
@@ -151,22 +152,36 @@ const removeAllEdu = () => {
 }
 const removePastWork = (unique) => {
     const removeDiv = document.getElementById(unique);
-    removeDiv.innerHTML = ""; 
+    removeDiv.remove(); 
 };
 
 const editPastWork = (unique) => {
     allJobAppStorage.forEach(e => {
-        if (unique) {                   // FIX CONDITIONAL <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        if (`'${unique}'` == e.uniqueWorkId) {          
             console.log("passed!");
             company.value = e.company;
             position.value = e.position;
             workStartDate.value = e.startDate;
             workEndDate.value = e.endDate;
             responsibility.value = e.responsibility;
+
+            const temp = document.getElementById(unique);
+            temp.innerHTML = `
+                            <br />
+                            Company: ${company.value} <br />
+                            Position: ${position.value} <br />
+                            Time: ${workStartDate.value} -> ${workEndDate.value} <br />
+                            Description: ${responsibility.value} <br />
+                            <button onclick="editPastWork(${e.uniqueWorkId})" type="button">Edit</button>
+                            <button onclick="removePastWork(${e.uniqueWorkId})" type="button">Delete</button>
+                            <br />
+                            `
         }
+
     });
+
     showPastWorkBox();
-};
+}; 
 
 const allEducationStorage =[];
 const allJobAppStorage = []; //array that stores objects
