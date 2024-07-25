@@ -22,7 +22,8 @@ const listPastJobs = document.getElementById("inputted-job-experience");
 //addWorkBtn.addEventListener("click", () => taskForm.classList.toggle("hidden"));
 //use this if i need to hide shit. this will defniteley change
 
-
+let currentlyEditing = false;
+let currentlyEditingId;
 const container = document.getElementById("work-experience-box");
 const company  = document.getElementById("company");
 const position = document.getElementById("position");
@@ -41,6 +42,7 @@ const degreeName = document.getElementById("degree-name");
 const schoolStartDate = document.getElementById("school-start-date");
 const schoolEndDate = document.getElementById("school-end-date");
 const doneAddingEducationBtn = document.getElementById("done-add-education");
+
 
 addWorkBtn.addEventListener("click", () => {showPastWorkBox()});     // Runs when Add Past Work Experience is pressed
 addEducationBtn.addEventListener("click", ()=> {showEducationBox()}); // Runs when Add Education is pressed
@@ -94,28 +96,50 @@ submitWorkBtn.addEventListener("click", (e) => {             // Checks validity 
     }
 });
 
-const submitWork = () => {              // Runs when submit button for PAST JOBS is pressed AND checked for validity
-    const pastJob = {                                       //pushes info to array and updates ui
-        uniqueWorkId: `'${company.value}-${position.value}-${workStartDate.value}'`,
-        company: company.value,
-        position: position.value,
-        startDate: workStartDate.value,
-        endDate: workEndDate.value,
-        responsibility: responsibility.value
-    };
-    allJobAppStorage.unshift(pastJob);
-
-    listPastJobs.innerHTML += `<div id=${pastJob.uniqueWorkId}><br />
-    Company: ${company.value} <br />
-    Position: ${position.value} <br />
-    Time: ${workStartDate.value} -> ${workEndDate.value} <br />
-    Description: ${responsibility.value} <br />
-    <button onclick="editPastWork(${pastJob.uniqueWorkId})" type="button">Edit</button>
-    <button onclick="removePastWork(${pastJob.uniqueWorkId})" type="button">Delete</button>
-    <br /></div>
-    `
-    alert("Successfully saved!");
-    removeAll();
+const submitWork = () => {              // Runs when submit button for PAST JOBS is pressed AND checked for validity 
+    if (editBool() == true) {               //pushes info to array and updates ui
+        allJobAppStorage.forEach(e => {
+            if (`'${currentlyEditingId}'` == e.uniqueWorkId) {
+                const temp = document.getElementById(currentlyEditingId);
+                temp.innerHTML = `
+                                <br />
+                                Company: ${company.value} <br />
+                                Position: ${position.value} <br />
+                                Time: ${workStartDate.value} -> ${workEndDate.value} <br />
+                                Description: ${responsibility.value} <br />
+                                <button onclick="editPastWork(${company.value}-${position.value}-${workStartDate.value})" type="button">Edit</button>
+                                <button onclick="removePastWork(${company.value}-${position.value}-${workStartDate.value})" type="button">Delete</button>
+                                <br />
+                                `
+                alert("Updated!");
+                currentlyEditing = false;
+                currentlyEditingId;
+                container.style.display = "none";
+            }
+        })
+    }
+    else {
+        const pastJob = {
+            uniqueWorkId: `'${company.value}-${position.value}-${workStartDate.value}'`,
+            company: company.value,
+            position: position.value,
+            startDate: workStartDate.value,
+            endDate: workEndDate.value,
+            responsibility: responsibility.value
+        };
+        allJobAppStorage.unshift(pastJob);
+        listPastJobs.innerHTML += `<div id=${pastJob.uniqueWorkId}><br />
+        Company: ${company.value} <br />
+        Position: ${position.value} <br />
+        Time: ${workStartDate.value} -> ${workEndDate.value} <br />
+        Description: ${responsibility.value} <br />
+        <button onclick="editPastWork(${pastJob.uniqueWorkId})" type="button">Edit</button>
+        <button onclick="removePastWork(${pastJob.uniqueWorkId})" type="button">Delete</button>
+        <br /></div>
+        `
+        alert("Successfully saved!");
+        removeAll();
+    }
 };
 
 
@@ -158,30 +182,29 @@ const removePastWork = (unique) => {
 const editPastWork = (unique) => {
     allJobAppStorage.forEach(e => {
         if (`'${unique}'` == e.uniqueWorkId) {          
-            console.log("passed!");
             company.value = e.company;
             position.value = e.position;
             workStartDate.value = e.startDate;
             workEndDate.value = e.endDate;
             responsibility.value = e.responsibility;
-
-            const temp = document.getElementById(unique);
-            temp.innerHTML = `
-                            <br />
-                            Company: ${company.value} <br />
-                            Position: ${position.value} <br />
-                            Time: ${workStartDate.value} -> ${workEndDate.value} <br />
-                            Description: ${responsibility.value} <br />
-                            <button onclick="editPastWork(${e.uniqueWorkId})" type="button">Edit</button>
-                            <button onclick="removePastWork(${e.uniqueWorkId})" type="button">Delete</button>
-                            <br />
-                            `
+            currentlyEditingId = unique;
+            editBool("true");
         }
 
     });
 
     showPastWorkBox();
 }; 
+
+const editBool = (bool) => {
+    if (bool == "true") {
+        currentlyEditing = true;
+        return;
+    }
+    else {
+        return currentlyEditing;
+    }
+}
 
 const allEducationStorage =[];
 const allJobAppStorage = []; //array that stores objects
