@@ -100,6 +100,15 @@ const submitWork = () => {              // Runs when submit button for PAST JOBS
     if (editBool() == true) {               //pushes info to array and updates ui
         allJobAppStorage.forEach(e => {
             if (`'${currentlyEditingId}'` == e.uniqueWorkId) {
+                e.uniqueWorkId = `'${company.value}-${position.value}-${workStartDate.value}'`
+                e.company = company.value;
+                e.position = position.value;
+                e.workStartDate = workStartDate.value;
+                e.workEndDate = workEndDate.value;
+                e.responsibility = responsibility.value;
+                console.log(currentlyEditingId);
+                console.log(e.uniqueWorkId);
+                console.log(e);
                 const temp = document.getElementById(currentlyEditingId);
                 temp.innerHTML = `
                                 <br />
@@ -107,8 +116,8 @@ const submitWork = () => {              // Runs when submit button for PAST JOBS
                                 Position: ${position.value} <br />
                                 Time: ${workStartDate.value} -> ${workEndDate.value} <br />
                                 Description: ${responsibility.value} <br />
-                                <button onclick="editPastWork(${company.value}-${position.value}-${workStartDate.value})" type="button">Edit</button>
-                                <button onclick="removePastWork(${company.value}-${position.value}-${workStartDate.value})" type="button">Delete</button>
+                                <button onclick="editPastWork(${e.uniqueWorkId})" type="button">Edit</button>
+                                <button onclick="removePastWork(${e.uniqueWorkId})" type="button">Delete</button>
                                 <br />
                                 `
                 alert("Updated!");
@@ -128,6 +137,7 @@ const submitWork = () => {              // Runs when submit button for PAST JOBS
             responsibility: responsibility.value
         };
         allJobAppStorage.unshift(pastJob);
+
         listPastJobs.innerHTML += `<div id=${pastJob.uniqueWorkId}><br />
         Company: ${company.value} <br />
         Position: ${position.value} <br />
