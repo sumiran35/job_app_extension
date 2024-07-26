@@ -122,7 +122,7 @@ const submitWork = () => {              // Runs when submit button for PAST JOBS
                                 `
                 alert("Updated!");
                 currentlyEditing = false;
-                currentlyEditingId;
+                currentlyEditingId = "";
                 container.style.display = "none";
             }
         })
@@ -175,6 +175,8 @@ const removeAll = () => {                                           // Helper fu
     for (let i = 0; i < discardBox.length; i++) {
         discardBox[i].style.display = "none";
     }
+    currentlyEditing = false;
+    currentlyEditingId = "";
 };
 
 const removeAllEdu = () => {
