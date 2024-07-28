@@ -60,15 +60,16 @@ doneAddingBtn.addEventListener("click", ()=> {                  // Runs when X i
     for (let i = 0; i < discardBox.length; i++) {
         discardBox[i].style.display = "block";
     }
-    acceptCloseBtn.addEventListener("click", (e) => {           // This is the "cancel close" option after you press X
+    acceptCloseBtn.addEventListener("click", (e) => {           // This is the "close" option after you press X
         e.preventDefault();
         removeAll();
  });
-    cancelCloseBtn.addEventListener("click", ()=>{              // This is the "close" option after you press X
+    cancelCloseBtn.addEventListener("click", (e)=>{              // This is the "cancel close" option after you press X
+        e.preventDefault();
         for (let i = 0; i < discardBox.length; i++) {
             discardBox[i].style.display = "none";
         }
-    });
+    }); 
 });
 
 stopAddingBtn.addEventListener("click", () => {                             // Runs when X is pressed for education
@@ -105,6 +106,8 @@ const submitWork = () => {              // Runs when submit button for PAST JOBS
                 e.workStartDate = workStartDate.value;
                 e.workEndDate = workEndDate.value;
                 e.responsibility = responsibility.value;
+
+                let tempId = `${company.value}-${position.value}-${workStartDate.value}`;
                 console.log(currentlyEditingId);
                 console.log(e.uniqueWorkId);
                 console.log(e);
@@ -120,6 +123,7 @@ const submitWork = () => {              // Runs when submit button for PAST JOBS
                                 <br />
                                 `
                 alert("Updated!");
+                temp.setAttribute("id", tempId);
                 currentlyEditing = false;
                 currentlyEditingId = "";
                 container.style.display = "none";
@@ -150,7 +154,6 @@ const submitWork = () => {              // Runs when submit button for PAST JOBS
         removeAll();
     }
 };
-
 
 const editPastEducation = () => {};                     // Functions for editing education (use edit work for reference)
 
@@ -197,11 +200,9 @@ const editPastWork = (unique) => {              //  Helper function that checks 
             workEndDate.value = e.endDate;
             responsibility.value = e.responsibility;
             currentlyEditingId = unique;
-            editBool("true");
+            currentlyEditing = true;
         }
-
     });
-
     showPastWorkBox();
 }; 
 
