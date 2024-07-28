@@ -60,11 +60,11 @@ doneAddingBtn.addEventListener("click", ()=> {                  // Runs when X i
     for (let i = 0; i < discardBox.length; i++) {
         discardBox[i].style.display = "block";
     }
-    acceptCloseBtn.addEventListener("click", (e) => {
+    acceptCloseBtn.addEventListener("click", (e) => {           // This is the "cancel close" option after you press X
         e.preventDefault();
         removeAll();
  });
-    cancelCloseBtn.addEventListener("click", ()=>{
+    cancelCloseBtn.addEventListener("click", ()=>{              // This is the "close" option after you press X
         for (let i = 0; i < discardBox.length; i++) {
             discardBox[i].style.display = "none";
         }
@@ -86,7 +86,6 @@ stopAddingBtn.addEventListener("click", () => {                             // R
 
 submitWorkBtn.addEventListener("click", (e) => {             // Checks validity after trying to submit past work
     let validity = company.value && position.value && workStartDate.value && workEndDate.value && responsibility.value;
-    alert(validity);
     e.preventDefault();
     if (validity) {
         submitWork();
@@ -99,7 +98,7 @@ submitWorkBtn.addEventListener("click", (e) => {             // Checks validity 
 const submitWork = () => {              // Runs when submit button for PAST JOBS is pressed AND checked for validity 
     if (editBool() == true) {               //pushes info to array and updates ui
         allJobAppStorage.forEach(e => {
-            if (`'${currentlyEditingId}'` == e.uniqueWorkId) {
+            if (`'${currentlyEditingId}'` == e.uniqueWorkId) {    // Checks if the submission was for an edit or new job, if true, submission was an edit
                 e.uniqueWorkId = `'${company.value}-${position.value}-${workStartDate.value}'`
                 e.company = company.value;
                 e.position = position.value;
@@ -127,7 +126,7 @@ const submitWork = () => {              // Runs when submit button for PAST JOBS
             }
         })
     }
-    else {
+    else {                                              // Submission for new job
         const pastJob = {
             uniqueWorkId: `'${company.value}-${position.value}-${workStartDate.value}'`,
             company: company.value,
@@ -153,12 +152,10 @@ const submitWork = () => {              // Runs when submit button for PAST JOBS
 };
 
 
-const editPastEducation = () => {};
+const editPastEducation = () => {};                     // Functions for editing education (use edit work for reference)
 
 
-const removePastEducation = () => {
-
-};
+const removePastEducation = () => {};                   // Function for removing education (use remove work for reference)
 
 const clearJobInfo = () => {                            // Clears information in past work info boxes
     company.value = "";
@@ -179,20 +176,20 @@ const removeAll = () => {                                           // Helper fu
     currentlyEditingId = "";
 };
 
-const removeAllEdu = () => {
+const removeAllEdu = () => {                                        // Helper function to remove education boxes
     educationBox.style.display = "none";
     const discardBox = document.getElementsByClassName("discard-edu");
     for (let i = 0; i < discardBox.length; i++) {
         discardBox[i].style.display = "none";
     }
 }
-const removePastWork = (unique) => {
+const removePastWork = (unique) => {            // Helper function which is called from "Delete" button. Takes id of div to remove
     const removeDiv = document.getElementById(unique);
     removeDiv.remove(); 
 };
 
-const editPastWork = (unique) => {
-    allJobAppStorage.forEach(e => {
+const editPastWork = (unique) => {              //  Helper function that checks for the existing past work after EDIT button is clicked
+    allJobAppStorage.forEach(e => {                                 // Then pre fills existing information. Takes div id as a parameter 
         if (`'${unique}'` == e.uniqueWorkId) {          
             company.value = e.company;
             position.value = e.position;
@@ -208,7 +205,7 @@ const editPastWork = (unique) => {
     showPastWorkBox();
 }; 
 
-const editBool = (bool) => {
+const editBool = (bool) => {            // Helper function that is lowkey useless. Will probably be changed
     if (bool == "true") {
         currentlyEditing = true;
         return;
