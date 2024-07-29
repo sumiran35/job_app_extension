@@ -37,13 +37,15 @@ const educationBox = document.getElementById("education-box");
 const stopAddingBtn = document.getElementById("done-adding-edu");
 const acceptCloseBtnEdu = document.getElementById("accept-close-edu");
 const cancelCloseBtnEdu = document.getElementById("cancel-close-edu");
-const levelOfEducation = document.getElementById("level-of-education");
-const schoolName = document.getElementById("school-name");
-const degreeName = document.getElementById("degree-name");
-const schoolStartDate = document.getElementById("school-start-date");
-const schoolEndDate = document.getElementById("school-end-date");
-const doneAddingEducationBtn = document.getElementById("done-add-education");
-
+const levelOfEducation = document.getElementById("dropdown");
+const schoolName = document.getElementById("school");
+const degreeName = document.getElementById("degree");
+const schoolStartDate = document.getElementById("education-start-date");
+const schoolEndDate = document.getElementById("education-end-date");
+const doneAddingEducationBtn = document.getElementById("save-education-experience");
+const listEducation = document.getElementById("inputted-education");
+let currentlyEditingEdu = false;
+let currentlyEditingEduId;
 
 addWorkBtn.addEventListener("click", () => {showPastWorkBox()});     // Runs when Add Past Work Experience is pressed
 addEducationBtn.addEventListener("click", ()=> {showEducationBox()}); // Runs when Add Education is pressed
@@ -54,8 +56,6 @@ const showEducationBox = () => {                                // helper functi
 
 const showPastWorkBox = () => {                                     // helper function to show past work box
     container.style.display = "block";
-    removeResumeBtn.style.display = "block";
-
 };
 
 doneAddingBtn.addEventListener("click", ()=> {                  // Runs when X is pressed for past jobs
@@ -111,9 +111,6 @@ const submitWork = () => {              // Runs when submit button for PAST JOBS
                 e.responsibility = responsibility.value;
 
                 let tempId = `${company.value}-${position.value}-${workStartDate.value}`;
-                console.log(currentlyEditingId);
-                console.log(e.uniqueWorkId);
-                console.log(e);
                 const temp = document.getElementById(currentlyEditingId);
                 temp.innerHTML = `
                                 <br />
@@ -158,17 +155,103 @@ const submitWork = () => {              // Runs when submit button for PAST JOBS
     }
 };
 
-const editPastEducation = () => {};                     // Functions for editing education (use edit work for reference)
+doneAddingEducationBtn.addEventListener("click", () => {    // runs after the submit button for education is pressed. Checks validity and calls helper functions
+    let validity = levelOfEducation.value && schoolName.value && degreeName.value && schoolStartDate.value && schoolEndDate.value;
+    if (validity) {
+        submitEducation();
+    }
+    else {
+        alert("Fill in all areas");
+    }
+});
+
+const submitEducation = () => {
+    if (currentlyEditingEdu) {
+        allEducationStorage.forEach(e => {
+            if (`'${currentlyEditingEduId}'` == e.uniqueEducationId) {
+                e.levelOfEducation.value = levelOfEducation.value;
+                e.schoolName.value = schoolName.value;
+                e.degreeName.value = degreeName.value;
+                e.schoolStartDate.value = schoolStartDate.value;
+                e.schoolEndDate.value = schoolEndDate.value;
+                
+                let tempId = `${levelOfEducation.value}-${schoolName.value}-${degreeName.value}`;
+                const temp = document.getElementById(currentlyEditingEduId);
+                temp.innerHTML = `
+                                <br />
+                                Degree: ${degreeName} <br />
+                                Education Level: ${levelOfEducation.value} <br />
+                                School Name: ${schoolName.value} <br />
+                                Time: ${schoolStartDate.value} -> ${schoolEndDate.value} <br />
+                                <button onclick="editPastEducation(${e.uniqueEducationId})" type="button">Edit</button>
+                                <button onclick="removePastEducation(${e.uniqueEducationId})" type="button">Delete</button>
+                                <br />
+                                `
+                alert("Updated!");
+                temp.setAttribute("id", tempId);
+                currentlyEditingEdu = false;
+                currentlyEditingEduId = "";
+                educationBox.style.display = "none";
+            }
+        });
+    }
+    else {
+        const edu = {
+            uniqueEducationId: `'${levelOfEducation.value}-${schoolName.value}-${degreeName.value}'`,
+            educationLevel: levelOfEducation.value,
+            school: schoolName.value,
+            degree: degreeName.value,
+            start: schoolStartDate.value,
+            end: schoolEndDate.value
+        }
+        allEducationStorage.unshift(edu);
+
+        listEducation.innerHTML += `<div id=${edu.uniqueEducationId}><br />
+                                    Degree: ${degreeName} <br />
+                                    Education Level: ${levelOfEducation.value} <br />
+                                    School Name: ${schoolName.value} <br />
+                                    Time: ${schoolStartDate.value} -> ${schoolEndDate.value} <br />
+                                    <button onclick="editPastEducation(${edu.uniqueEducationId})" type="button">Edit</button>
+                                    <button onclick="removePastEducation(${edu.uniqueEducationId})" type="button">Delete</button>
+                                    <br />
+                                    </div>
+                                    `
+        alert("Successfully saved!");
+        removeAllEdu();
+    }
+};
+const editPastEducation = (unique) => {               // Functions for editing education (use edit work for reference)
+    allEducationStorage.forEach(e => {                                 
+        if (`'${unique}'` == e.uniqueEducationId) {          
+            levelOfEducation.value = e.levelOfEducation;
+            degreeName.value = e.degreeName;
+            schoolStartDate.value = e.schoolStartDate;
+            schoolEndDate.value = e.schoolEndDate;
+            responsibility.value = e.responsibility;
+            currentlyEditingEduId = unique;
+            currentlyEditingEdu = true;
+        }
+    });
+    showPastWorkBox();
+};
 
 
 const removePastEducation = () => {};                   // Function for removing education (use remove work for reference)
 
-const clearJobInfo = () => {                            // Clears information in past work info boxes
+const clearJobInfo = () => {                            // helper function to remove all info inside past work boxes
     company.value = "";
     position.value = "";
     workStartDate.value = "";
     workEndDate.value = "";
     responsibility.value = "";
+};
+
+const clearEducationInfo = () => {                          // helper function to remove all info inside education boxes
+    levelOfEducation.value = "";
+    schoolName.value = "";
+    degreeName.value = "";
+    schoolStartDate.value = "";
+    schoolEndDate.value = ""; 
 };
 
 const removeAll = () => {                                           // Helper function to remove past work boxes
@@ -183,13 +266,18 @@ const removeAll = () => {                                           // Helper fu
 };
 
 const removeAllEdu = () => {                                        // Helper function to remove education boxes
+    clearEducationInfo();
     educationBox.style.display = "none";
     const discardBox = document.getElementsByClassName("discard-edu");
     for (let i = 0; i < discardBox.length; i++) {
         discardBox[i].style.display = "none";
     }
+    // curr editing + curredit id -- LINE 184/185 REFERENCE
 }
 const removePastWork = (unique) => {            // Helper function which is called from "Delete" button. Takes id of div to remove
+    if (unique == currentlyEditingId) {
+        removeAll();
+    }
     const removeDiv = document.getElementById(unique);
     removeDiv.remove(); 
 };
@@ -228,8 +316,8 @@ removeResumeBtn.addEventListener("click", () => {       // Removes the file and 
     removeResumeBtn.style.display = "none";
 });
 
-const allEducationStorage =[];
-const allJobAppStorage = []; //array that stores objects
+const allEducationStorage =[]; // stores education objects
+const allJobAppStorage = []; //array that stores objects (work)
 
 let currentJobApp = {
     
