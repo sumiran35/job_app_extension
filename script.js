@@ -165,10 +165,10 @@ doneAddingEducationBtn.addEventListener("click", () => {    // runs after the su
     }
 });
 
-const submitEducation = () => {
-    if (currentlyEditingEdu) {
+const submitEducation = () => {    // after validation check, helper function runs to determine whether submission was an edit or not
+    if (currentlyEditingEdu) {      // then appends or changes html depending on condition. also pushes to array or change object contents
         allEducationStorage.forEach(e => {
-            if (`'${currentlyEditingEduId}'` == e.uniqueEducationId) {
+            if (`'${currentlyEditingEduId}'` == e.uniqueEducationId) {                  // condition: submission = edit
                 e.levelOfEducation.value = levelOfEducation.value;
                 e.schoolName.value = schoolName.value;
                 e.degreeName.value = degreeName.value;
@@ -177,6 +177,7 @@ const submitEducation = () => {
                 
                 let tempId = `${levelOfEducation.value}-${schoolName.value}-${degreeName.value}`;
                 const temp = document.getElementById(currentlyEditingEduId);
+                console.log(temp);
                 temp.innerHTML = `
                                 <br />
                                 Degree: ${degreeName} <br />
@@ -195,7 +196,7 @@ const submitEducation = () => {
             }
         });
     }
-    else {
+    else {                                                  // condition: submission = new
         const edu = {
             uniqueEducationId: `'${levelOfEducation.value}-${schoolName.value}-${degreeName.value}'`,
             educationLevel: levelOfEducation.value,
@@ -207,7 +208,7 @@ const submitEducation = () => {
         allEducationStorage.unshift(edu);
 
         listEducation.innerHTML += `<div id=${edu.uniqueEducationId}><br />
-                                    Degree: ${degreeName} <br />
+                                    Degree: ${degreeName.value} <br />
                                     Education Level: ${levelOfEducation.value} <br />
                                     School Name: ${schoolName.value} <br />
                                     Time: ${schoolStartDate.value} -> ${schoolEndDate.value} <br />
@@ -223,20 +224,27 @@ const submitEducation = () => {
 const editPastEducation = (unique) => {               // Functions for editing education (use edit work for reference)
     allEducationStorage.forEach(e => {                                 
         if (`'${unique}'` == e.uniqueEducationId) {          
-            levelOfEducation.value = e.levelOfEducation;
-            degreeName.value = e.degreeName;
-            schoolStartDate.value = e.schoolStartDate;
-            schoolEndDate.value = e.schoolEndDate;
-            responsibility.value = e.responsibility;
+            levelOfEducation.value = e.educationLevel;
+            degreeName.value = e.degree;
+            schoolName.value = e.school;
+            schoolStartDate.value = e.start;
+            schoolEndDate.value = e.end;
             currentlyEditingEduId = unique;
             currentlyEditingEdu = true;
         }
     });
-    showPastWorkBox();
+    showEducationBox();
+    console.log(allEducationStorage);
 };
 
 
-const removePastEducation = () => {};                   // Function for removing education (use remove work for reference)
+const removePastEducation = (unique) => {                   // Function for removing education (use remove work for reference)
+    if (unique == currentlyEditingEduId) {
+        removeAllEdu();
+    }
+    const removeDiv = document.getElementById(unique);
+    removeDiv.remove();
+};
 
 const clearJobInfo = () => {                            // helper function to remove all info inside past work boxes
     company.value = "";
@@ -272,7 +280,8 @@ const removeAllEdu = () => {                                        // Helper fu
     for (let i = 0; i < discardBox.length; i++) {
         discardBox[i].style.display = "none";
     }
-    // curr editing + curredit id -- LINE 184/185 REFERENCE
+    currentlyEditingEdu = false;
+    currentlyEditingId = "";
 }
 const removePastWork = (unique) => {            // Helper function which is called from "Delete" button. Takes id of div to remove
     if (unique == currentlyEditingId) {
