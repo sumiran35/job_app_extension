@@ -7,6 +7,7 @@ const zip = document.getElementById("postal");
 const phone = document.getElementById("phone");
 const email = document.getElementById("email");
 const resume = document.getElementById("resume");
+const removeResumeBtn = document.getElementById("remove-resume-btn")
 const legal1 = document.getElementById("legal1");
 const legal2 = document.getElementById("legal2");
 //use this button to add work might need to be hidden in the begining
@@ -53,6 +54,8 @@ const showEducationBox = () => {                                // helper functi
 
 const showPastWorkBox = () => {                                     // helper function to show past work box
     container.style.display = "block";
+    removeResumeBtn.style.display = "block";
+
 };
 
 doneAddingBtn.addEventListener("click", ()=> {                  // Runs when X is pressed for past jobs
@@ -215,6 +218,15 @@ const editBool = (bool) => {            // Helper function that is lowkey useles
         return currentlyEditing;
     }
 }
+
+resume.addEventListener("change", () => {               // Displays the "Clear file" button after inserting a file
+    removeResumeBtn.style.display = "block";
+});
+
+removeResumeBtn.addEventListener("click", () => {       // Removes the file and hides the button
+    resume.value = "";
+    removeResumeBtn.style.display = "none";
+});
 
 const allEducationStorage =[];
 const allJobAppStorage = []; //array that stores objects
