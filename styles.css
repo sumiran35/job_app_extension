@@ -13,8 +13,13 @@ main {
     max-width: 500px;
 }
 
+.remove-resume {
+    display: none;
+    width: 18%;
+}
+
 form {
-    display: flex;
+    display: flex ;
     flex-direction: column;
 }
 
