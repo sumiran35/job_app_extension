@@ -1,108 +1,108 @@
-body {
-    font-family: 'Times New Roman', sans-serif;
-}
+    body {
+        font-family: 'Times New Roman', sans-serif;
+    }
 
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
-.info {
-    width: 100%;
-    max-width: 500px;
-}
+    .info {
+        width: 100%;
+        max-width: 500px;
+    }
 
-.remove-resume {
-    display: none;
-    width: 18%;
-}
+    .remove-resume {
+        display: none;
+        width: 18%;
+    }
 
-form {
-    display: flex ;
-    flex-direction: column;
-}
+    form {
+        display: flex ;
+        flex-direction: column;
+    }
 
-.form-label {
-    font-weight: bold;
-}
+    .form-label {
+        font-weight: bold;
+    }
 
-.form-input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    border: 1px solid grey;
-    border-radius: 5px;
-}
+    .form-input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 20px;
+        border: 1px solid grey;
+        border-radius: 5px;
+    }
 
-button.form-input {
-    cursor: pointer;
-}
+    button.form-input {
+        cursor: pointer;
+    }
 
-.add-work, #education, .add-education {
-    margin-top: 20px;
-}
+    .add-work, #education, .add-education {
+        margin-top: 20px;
+    }
 
-.add-work button, .add-education button{
-    padding: 10px 20px;
-    border: 0px;
-    background-color: blue;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-}
+    .add-work button, .add-education button{
+        padding: 10px 20px;
+        border: 0px;
+        background-color: blue;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-#save {
-    justify-content: center;
-    margin-top: 25px;
-}
+    #save {
+        justify-content: center;
+        margin-top: 25px;
+    }
 
-#work-experience-box, #education-box{
-    z-index: 1;
-    display: none;
-    width: 500px;
-    background-color: #f5efef;
-    padding: 20px; 
-    margin-top: 20px; 
-    border: 1px solid #dad7d7; 
+    #work-experience-box, #education-box{
+        z-index: 1;
+        display: none;
+        width: 500px;
+        background-color: #f5efef;
+        padding: 20px; 
+        margin-top: 20px; 
+        border: 1px solid #dad7d7; 
 
-}
+    }
 
-.done-adding, .done-adding-edu{
-    background: none;
-    border: none;
-    cursor: pointer;
-    width: 20px;
-    height: 20px;
-    position: relative;
-    margin-left: -4.5%;
-    z-index: 2;
-}
+    .done-adding, .done-adding-edu{
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        position: relative;
+        margin-left: -4.5%;
+        z-index: 2;
+    }
 
-.close-icon {
-    width: 20px;
-    height: 20px;
-    float: left;
-    position: relative;
+    .close-icon {
+        width: 20px;
+        height: 20px;
+        float: left;
+        position: relative;
 
-}
+    }
 
-.discard, .discard-edu {
-    display: none;
-    background-color: white;
-    padding: 10px;
-    margin: 10px auto;
-    border-radius: 15px;
-    z-index: 2;
-}
+    .discard, .discard-edu {
+        display: none;
+        background-color: white;
+        padding: 10px;
+        margin: 10px auto;
+        border-radius: 15px;
+        z-index: 2;
+    }
 
-#accept-close, #cancel-close, #accept-close-edu, #cancel-close-edu {
-    cursor: pointer;
-}
+    #accept-close, #cancel-close, #accept-close-edu, #cancel-close-edu {
+        cursor: pointer;
+    }
 
-.discard-box, .discard-box-edu {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
+    .discard-box, .discard-box-edu {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
