@@ -45,7 +45,7 @@ const schoolEndDate = document.getElementById("education-end-date");
 const doneAddingEducationBtn = document.getElementById("save-education-experience");
 const listEducation = document.getElementById("inputted-education");
 let currentlyEditingEdu = false;
-let currentlyEditingEduId;
+let currentlyEditingEduId = "";
 
 addWorkBtn.addEventListener("click", () => {showPastWorkBox()});     // Runs when Add Past Work Experience is pressed
 addEducationBtn.addEventListener("click", ()=> {showEducationBox()}); // Runs when Add Education is pressed
@@ -100,7 +100,7 @@ submitWorkBtn.addEventListener("click", (e) => {             // Checks validity 
 });
 
 const submitWork = () => {              // Runs when submit button for PAST JOBS is pressed AND checked for validity 
-    if (editBool() == true) {               //pushes info to array and updates ui
+    if (currentlyEditing == true) {               //pushes info to array and updates ui
         allJobAppStorage.forEach(e => {
             if (`'${currentlyEditingId}'` == e.uniqueWorkId) {    // Checks if the submission was for an edit or new job, if true, submission was an edit
                 e.uniqueWorkId = `'${company.value}-${position.value}-${workStartDate.value}'`
@@ -149,14 +149,15 @@ const submitWork = () => {              // Runs when submit button for PAST JOBS
         <button onclick="editPastWork(${pastJob.uniqueWorkId})" type="button">Edit</button>
         <button onclick="removePastWork(${pastJob.uniqueWorkId})" type="button">Delete</button>
         <br /></div>
-        `
+        `;
         alert("Successfully saved!");
         removeAll();
     }
 };
 
-doneAddingEducationBtn.addEventListener("click", () => {    // runs after the submit button for education is pressed. Checks validity and calls helper functions
+doneAddingEducationBtn.addEventListener("click", (e) => {    // runs after the submit button for education is pressed. Checks validity and calls helper functions
     let validity = levelOfEducation.value && schoolName.value && degreeName.value && schoolStartDate.value && schoolEndDate.value;
+    e.preventDefault();
     if (validity) {
         submitEducation();
     }
@@ -169,18 +170,20 @@ const submitEducation = () => {    // after validation check, helper function ru
     if (currentlyEditingEdu) {      // then appends or changes html depending on condition. also pushes to array or change object contents
         allEducationStorage.forEach(e => {
             if (`'${currentlyEditingEduId}'` == e.uniqueEducationId) {                  // condition: submission = edit
-                e.levelOfEducation.value = levelOfEducation.value;
-                e.schoolName.value = schoolName.value;
-                e.degreeName.value = degreeName.value;
-                e.schoolStartDate.value = schoolStartDate.value;
-                e.schoolEndDate.value = schoolEndDate.value;
+                console.log(allEducationStorage);
+                e.uniqueEducationId = `'${levelOfEducation.value}-${schoolName.value}-${degreeName.value}'`,
+                e.educationLevel = levelOfEducation.value;
+                e.school = schoolName.value;
+                e.degree = degreeName.value;
+                e.start = schoolStartDate.value;
+                e.end = schoolEndDate.value;
                 
                 let tempId = `${levelOfEducation.value}-${schoolName.value}-${degreeName.value}`;
                 const temp = document.getElementById(currentlyEditingEduId);
                 console.log(temp);
                 temp.innerHTML = `
                                 <br />
-                                Degree: ${degreeName} <br />
+                                Degree: ${degreeName.value} <br />
                                 Education Level: ${levelOfEducation.value} <br />
                                 School Name: ${schoolName.value} <br />
                                 Time: ${schoolStartDate.value} -> ${schoolEndDate.value} <br />
@@ -197,6 +200,7 @@ const submitEducation = () => {    // after validation check, helper function ru
         });
     }
     else {                                                  // condition: submission = new
+        alert("hbruhasd");
         const edu = {
             uniqueEducationId: `'${levelOfEducation.value}-${schoolName.value}-${degreeName.value}'`,
             educationLevel: levelOfEducation.value,
@@ -219,6 +223,7 @@ const submitEducation = () => {    // after validation check, helper function ru
                                     `
         alert("Successfully saved!");
         removeAllEdu();
+        console.log(allEducationStorage);
     }
 };
 const editPastEducation = (unique) => {               // Functions for editing education (use edit work for reference)
@@ -234,6 +239,8 @@ const editPastEducation = (unique) => {               // Functions for editing e
         }
     });
     showEducationBox();
+    currentlyEditingEdu = true;
+    currentlyEditingEduId = unique;
     console.log(allEducationStorage);
 };
 
@@ -306,15 +313,6 @@ const editPastWork = (unique) => {              //  Helper function that checks 
     showPastWorkBox();
 }; 
 
-const editBool = (bool) => {            // Helper function that is lowkey useless. Will probably be changed
-    if (bool == "true") {
-        currentlyEditing = true;
-        return;
-    }
-    else {
-        return currentlyEditing;
-    }
-}
 
 resume.addEventListener("change", () => {               // Displays the "Clear file" button after inserting a file
     removeResumeBtn.style.display = "block";
